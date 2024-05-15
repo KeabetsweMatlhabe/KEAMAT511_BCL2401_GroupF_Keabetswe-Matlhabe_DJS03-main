@@ -1,11 +1,17 @@
+//Importing necessary data and constants from data.js file
 import { books, authors, genres, BOOKS_PER_PAGE } from './data.js'
 
+//Initializing page number and matche array
 let page = 1;
-let matches = books
+let matches = books;
 
+//creating a document fragment
 const starting = document.createDocumentFragment()
 
-for (const { author, id, image, title } of matches.slice(0, BOOKS_PER_PAGE)) {
+//function ti create and append book previews
+const createBookPreviews = (books,container) => {
+    const fragment = document.createDocumentFragment();
+   for (const { author, id, image, title } of matches.slice(0, BOOKS_PER_PAGE)) {
     const element = document.createElement('button')
     element.classList = 'preview'
     element.setAttribute('data-preview', id)
@@ -23,6 +29,8 @@ for (const { author, id, image, title } of matches.slice(0, BOOKS_PER_PAGE)) {
     `
 
     starting.appendChild(element)
+   }
+   container.appendChild(fragment);
 }
 
 document.querySelector('[data-list-items]').appendChild(starting)
